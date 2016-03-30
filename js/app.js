@@ -21,15 +21,27 @@ Enemy.prototype.update = function(dt) {
     // which will ensure the game runs at the same speed for
     // all computers.
     function selectFrom(startNumber, endNumber) {
-         var choice = endNumber - startNumber + 1;
+         var choice = endNumber - startNumber + 10;
          return Math.floor(Math.random() * choice + startNumber)
     }
 
-    var randspeed = selectFrom(20,80); //random number from 20 to 80
+    var randspeed = selectFrom(2,1000); //random number from 20 to 80
     this.speed = randspeed;
-    this.x += this.x + this.speed * dt;
+    this.x = this.x + this.speed * dt;
 
 };
+
+     //collision with the Player
+var collision = function(allEnemies,Player){
+    if(!(allEnemies.left > this.right||
+         allEnemies.right < this.left|| 
+         allEnemies.top > this.bottom|| 
+         allEnemies.bottom < this.top))
+    return reset();
+} 
+
+
+
 
 // Draw the enemy on the screen, required method for game
 Enemy.prototype.render = function() {
@@ -39,25 +51,40 @@ Enemy.prototype.render = function() {
 // Now write your own player class
 // This class requires an update(), render() and
 // a handleInput() method.
-var player = function(x, y, speed) {
+var Player = function(x, y) {
     //Setting the Player's initial location
     this.x = x;
     this.y = y;  
-    //Setting the Player's speed 
-    this.speed = speed;
     this.sprite = 'images/char-boy.png';
 };
 
+
+Player.prototype.update = function(dt) {
+
+collision
+
+};
+
+
+Player.prototype.reset = function() {
+  this.x = 200;
+  this.y = 400;
+};
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
+Player.prototype.render = function() {
+    ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+};
+
 
 var allEnemies = [
 new Enemy(0, 55, 1),
-new Enemy(0, 140, 1),
+new Enemy(0, 140, 70),
 new Enemy(0, 225, 1)
 ];
 
+var player = new Player(200,400);
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
