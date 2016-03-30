@@ -25,7 +25,7 @@ Enemy.prototype.update = function(dt) {
          return Math.floor(Math.random() * choice + startNumber)
     }
 
-    var randspeed = selectFrom(2,1000); //random number from 20 to 80
+    var randspeed = selectFrom(2,100); //random number from 20 to 80
     this.speed = randspeed;
     this.x = this.x + this.speed * dt;
 
@@ -60,11 +60,27 @@ var Player = function(x, y) {
 
 
 Player.prototype.update = function(dt) {
-
-collision
+// end here last time
 
 };
 
+Player.prototype.handleInput = function(keyCode) {
+    switch(keyCode){
+        case 'left' : //pree
+          this.x = this.x - 60;
+          break;
+        case 'right' : 
+          this.x = this.x + 60;
+          break;
+        case 'up' : 
+          this.y = this.y - 60;
+          break;
+        case 'down' : 
+          this.y = this.y + 60;
+          break;}
+        
+   
+}
 
 Player.prototype.reset = function() {
   this.x = 200;
