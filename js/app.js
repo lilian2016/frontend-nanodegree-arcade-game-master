@@ -20,14 +20,13 @@ Enemy.prototype.update = function(dt) {
     // You should multiply any movement by the dt parameter
     // which will ensure the game runs at the same speed for
     // all computers.
-    function selectFrom(startNumber, endNumber) {
-         var choice = endNumber - startNumber + 10;
-         return Math.floor(Math.random() * choice + startNumber)
-    }
+        this.speed = Math.floor(Math.random() * 300 + 100) ;
 
-    var randspeed = selectFrom(2,100); //random number from 20 to 80
-    this.speed = randspeed;
-    this.x = this.x + this.speed * dt;
+        this.x = this.x + this.speed* dt;
+
+         if (this.x > 500) {
+           this.x = 1;
+      }
 
 };
 
@@ -64,21 +63,41 @@ Player.prototype.update = function(dt) {
 
 };
 
+function Block(left, right, up, down) {
+    this.left = left || -10;
+    this.right = right || 515;
+    this.up = up || -35;
+    this.down = down || 510;
+}
+
+
 Player.prototype.handleInput = function(keyCode) {
     switch(keyCode){
         case 'left' : //pree
           this.x = this.x - 60;
+          if (this.x < 0) {
+          this.x = 0;
+          }
           break;
         case 'right' : 
           this.x = this.x + 60;
+          if (this.x > 420) {
+          this.x = 420;
+          }
           break;
         case 'up' : 
           this.y = this.y - 60;
+          if (this.y < 5) {
+          this.y = 5;
+          }
           break;
         case 'down' : 
           this.y = this.y + 60;
-          break;}
-        
+          if (this.y > 400) {
+          this.y = 400;
+          }
+         break;
+        }      
    
 }
 
@@ -95,9 +114,10 @@ Player.prototype.render = function() {
 
 
 var allEnemies = [
-new Enemy(0, 55, 1),
-new Enemy(0, 140, 70),
-new Enemy(0, 225, 1)
+new Enemy(0, 55, 0),
+new Enemy(0, 140, 0),
+new Enemy(0, 145, 0),
+new Enemy(0, 225, 0)
 ];
 
 var player = new Player(200,400);
