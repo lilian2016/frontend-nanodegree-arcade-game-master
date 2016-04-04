@@ -10,6 +10,7 @@ var Enemy = function(x, y, speed) {
     this.y = y; 
     this.width = 80;
     this.height = 50; 
+
     //Setting the Enemy speed 
     this.speed = speed;
     this.sprite = 'images/enemy-bug.png';
@@ -23,6 +24,8 @@ Enemy.prototype.update = function(dt) {
     // which will ensure the game runs at the same speed for
     // all computers.
         this.speed = Math.floor(Math.random() * 250 + 50) ;
+
+        this.checkCollisions();
 
         this.x = this.x + this.speed * dt;
         if (this.x > 500) {
@@ -40,21 +43,37 @@ Enemy.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
 
+Enemy.prototype.checkCollisions = function(){
+    
+     if(this.x < player.x + player.width &&
+         this.x + this.width > player.x &&
+         this.y + this.height > player.y && 
+         this.y < player.y + player.height)
+         {
+         prompt("You Got Chomped By The Bug!");
+                        player.x = 200;
+                        player.y = 400;
+                     }    
+} 
 
-Enemy.prototype.isColliding = function(enemy,player){
-   return !(player.x > (enemy.x + enemy.width)||
-         (player.x + player.width) < enemy.x||
-         (player.y + player.height) > enemy.y||
-         player.y < (enemy.y + enemy.height));
- };
+
+/*Enemy.prototype.isColliding = function(enemy,player){
+  allEnemies.forEach(function(enemy) {
+   return !(player.x < (enemy.x + enemy.width)||
+         (player.x + player.width) > enemy.x||
+         (player.y + player.height) < enemy.y||
+         player.y > (enemy.y + enemy.height));
+   });    
+ }
 
 Enemy.prototype.checkCollisions = function(enemy,player){
   if(this.isColliding(enemy,player)){
+    alert('Collision!');
     cosole.log('collision');
     console.trace();
     player.reset();
   }
-}
+}*/
 
 // Now write your own player class
 // This class requires an update(), render() and
@@ -71,13 +90,7 @@ var Player = function(x, y) {
 Player.prototype.update = function() {
 
    //this.checkCollisions();
-  //this.checkCollisions();
-
-  //or player wins!
- /* if (this.y >= 500) {
-    console.log('You Win!');
-    this.reset();
-  }*/
+  //checkCollisions();
 };
 
 
@@ -89,60 +102,7 @@ Player.prototype.reset = function() {
 
 
 
-     //collision with the Player
-/*function checkCollisions(){
-    allEnemies.forEach(function(enemy) {
-        if(player.x > enemy.x + enemy.width &&
-         player.x + player.width < enemy.x &&
-         player.y + player.height > enemy.y && 
-         player.y < enemy.y + enemy.height)
-         {
-           prompt("You Got Chomped By The Bug!");
-           console.log("Deeecent");
-           console.trace();
-                        player.x = 200; 
-                        player.y = 400;
-                     }
-                      else
-                     {
-                        return false;          
-                         console.log("Deeecent");
-                     }
-        
-    });
-} 
-*/
-
-
-
-/*function checkCollisions() {
-  //allEnemies.forEach(function(enemy) {
-Enemy.prototype.isColliding = function(enemy,player){
-   return !(this.x > enemy.x + enemy.width||
-         this.x + this.width < enemy.x||
-         this.y + this.height > enemy.y||
-         this.y < enemy.y + enemy.height);
- };
- // });
-//};*/
-
-/*function checkCollisions(){
-    allEnemies.forEach(function(enemy) {
-     if((player.x > enemy.x + enemy.width&&
-         player.x + player.width < enemy.x&&
-         player.y + player.height > enemy.y&& 
-         player.y < enemy.y + enemy.height)===true )
-         {
-         prompt("You Got Chomped By The Bug!");
-                        this.loc = (202, 405);
-                     }
-                      else
-                     {
-                        return false;
-                     }
-        }
-    });
-} */
+ 
 
 
 Player.prototype.render = function() {
@@ -150,8 +110,8 @@ Player.prototype.render = function() {
 };
 
 // a handleInput() method.
-Player.prototype.handleInput = function(keyCode) {
-    switch(keyCode){
+Player.prototype.handleInput = function(allowedKeys) {
+    switch(allowedKeys){
         case 'left' : //pree
           this.x = this.x - 60;
           if (this.x < -15) {
