@@ -17,10 +17,10 @@ The aim of the game is to avoid the collision between bugs and player.
 
 _Controls Buttons_
 
-<li>**Move up**: press up key</li>
-<li>**ove down**: press down key</li>
-<li>**Move left**: press left key</li>
-<li>**Move right**: press right key</li>
+<li>Move up: _press up key_</li>
+<li>Move down: _press down key_</li>
+<li>Move left: _press left key_ </li>
+<li>Move right: _press right key_ </li>
 
 
 
