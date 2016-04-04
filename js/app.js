@@ -7,7 +7,9 @@ var Enemy = function(x, y, speed) {
     // a helper we've provided to easily load images
     //Setting the Enemy initial location
     this.x = x;
-    this.y = y;  
+    this.y = y; 
+    this.width = 80;
+    this.height = 50; 
     //Setting the Enemy speed 
     this.speed = speed;
     this.sprite = 'images/enemy-bug.png';
@@ -20,24 +22,15 @@ Enemy.prototype.update = function(dt) {
     // You should multiply any movement by the dt parameter
     // which will ensure the game runs at the same speed for
     // all computers.
-        this.speed = Math.floor(Math.random() * 300 + 100) ;
+        this.speed = Math.floor(Math.random() * 250 + 50) ;
 
-        this.x = this.x + this.speed* dt;
+        this.x = this.x + this.speed * dt;
+        if (this.x > 500) {
+         this.x = 1;
+        }
 
-         if (this.x > 500) {
-           this.x = 1;
-      }
-
+ 
 };
-
-     //collision with the Player
-var collision = function(allEnemies,Player){
-    if(!(allEnemies.left > this.right||
-         allEnemies.right < this.left|| 
-         allEnemies.top > this.bottom|| 
-         allEnemies.bottom < this.top))
-    return reset();
-} 
 
 
 
@@ -47,36 +40,122 @@ Enemy.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
 
+
+Enemy.prototype.isColliding = function(enemy,player){
+   return !(player.x > (enemy.x + enemy.width)||
+         (player.x + player.width) < enemy.x||
+         (player.y + player.height) > enemy.y||
+         player.y < (enemy.y + enemy.height));
+ };
+
+Enemy.prototype.checkCollisions = function(enemy,player){
+  if(this.isColliding(enemy,player)){
+    cosole.log('collision');
+    console.trace();
+    player.reset();
+  }
+}
+
 // Now write your own player class
 // This class requires an update(), render() and
-// a handleInput() method.
 var Player = function(x, y) {
     //Setting the Player's initial location
     this.x = x;
     this.y = y;  
+    this.width = 80;
+    this.height = 50;
     this.sprite = 'images/char-boy.png';
 };
 
 
-Player.prototype.update = function(dt) {
-// end here last time
+Player.prototype.update = function() {
 
+   //this.checkCollisions();
+  //this.checkCollisions();
+
+  //or player wins!
+ /* if (this.y >= 500) {
+    console.log('You Win!');
+    this.reset();
+  }*/
 };
 
-function Block(left, right, up, down) {
-    this.left = left || -10;
-    this.right = right || 515;
-    this.up = up || -35;
-    this.down = down || 510;
-}
 
 
+Player.prototype.reset = function() {
+    this.x = 200;
+    this.y = 400;
+};
+
+
+
+     //collision with the Player
+/*function checkCollisions(){
+    allEnemies.forEach(function(enemy) {
+        if(player.x > enemy.x + enemy.width &&
+         player.x + player.width < enemy.x &&
+         player.y + player.height > enemy.y && 
+         player.y < enemy.y + enemy.height)
+         {
+           prompt("You Got Chomped By The Bug!");
+           console.log("Deeecent");
+           console.trace();
+                        player.x = 200; 
+                        player.y = 400;
+                     }
+                      else
+                     {
+                        return false;          
+                         console.log("Deeecent");
+                     }
+        
+    });
+} 
+*/
+
+
+
+/*function checkCollisions() {
+  //allEnemies.forEach(function(enemy) {
+Enemy.prototype.isColliding = function(enemy,player){
+   return !(this.x > enemy.x + enemy.width||
+         this.x + this.width < enemy.x||
+         this.y + this.height > enemy.y||
+         this.y < enemy.y + enemy.height);
+ };
+ // });
+//};*/
+
+/*function checkCollisions(){
+    allEnemies.forEach(function(enemy) {
+     if((player.x > enemy.x + enemy.width&&
+         player.x + player.width < enemy.x&&
+         player.y + player.height > enemy.y&& 
+         player.y < enemy.y + enemy.height)===true )
+         {
+         prompt("You Got Chomped By The Bug!");
+                        this.loc = (202, 405);
+                     }
+                      else
+                     {
+                        return false;
+                     }
+        }
+    });
+} */
+
+
+Player.prototype.render = function() {
+    ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+};
+
+// a handleInput() method.
 Player.prototype.handleInput = function(keyCode) {
     switch(keyCode){
         case 'left' : //pree
           this.x = this.x - 60;
-          if (this.x < 0) {
-          this.x = 0;
+          if (this.x < -15) {
+          this.x = -15;
           }
           break;
         case 'right' : 
@@ -88,7 +167,8 @@ Player.prototype.handleInput = function(keyCode) {
         case 'up' : 
           this.y = this.y - 60;
           if (this.y < 5) {
-          this.y = 5;
+          this.x = 200;  
+          this.y = 400;
           }
           break;
         case 'down' : 
@@ -101,10 +181,12 @@ Player.prototype.handleInput = function(keyCode) {
    
 }
 
-Player.prototype.reset = function() {
+/*Player.prototype.reset = function() {
   this.x = 200;
   this.y = 400;
-};
+};*/
+
+
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
@@ -114,11 +196,13 @@ Player.prototype.render = function() {
 
 
 var allEnemies = [
-new Enemy(0, 55, 0),
-new Enemy(0, 140, 0),
-new Enemy(0, 145, 0),
-new Enemy(0, 225, 0)
+new Enemy(0, 55, 3),
+new Enemy(0, 140, 200),
+new Enemy(0, 145, 70),
+new Enemy(0, 225, 2)
 ];
+
+
 
 var player = new Player(200,400);
 
