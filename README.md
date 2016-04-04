@@ -23,9 +23,6 @@ _Controls Buttons_
 <li>Move right: _press right key_ </li>
 
 
-
-
-
 ###Resources
 
 **Courses**

@@ -7,9 +7,9 @@ var Enemy = function(x, y, speed) {
     // a helper we've provided to easily load images
     //Setting the Enemy initial location
     this.x = x;
-    this.y = y; 
+    this.y = y;
     this.width = 60;
-    this.height = 50; 
+    this.height = 50;
 
     //Setting the Enemy speed 
     this.speed = speed;
@@ -23,16 +23,16 @@ Enemy.prototype.update = function(dt) {
     // You should multiply any movement by the dt parameter
     // which will ensure the game runs at the same speed for
     // all computers.
-        this.speed = Math.floor(Math.random() * 250 + 50) ;
+    this.speed = Math.floor(Math.random() * 250 + 50);
 
-        this.checkCollisions();
+    this.checkCollisions();
 
-        this.x = this.x + this.speed * dt;
-        if (this.x > 500) {
-         this.x = 1;
-        }
+    this.x = this.x + this.speed * dt;
+    if (this.x > 500) {
+        this.x = 1;
+    }
 
- 
+
 };
 
 
@@ -43,17 +43,16 @@ Enemy.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
 
-Enemy.prototype.checkCollisions = function(){
-    
-     if(this.x < player.x + player.width &&
-         this.x + this.width > player.x &&
-         this.y + this.height > player.y && 
-         this.y < player.y + player.height)
-         {
-         prompt("You Got Squashed By The Bug!");
-                        player.reset();
-                     }    
-} 
+Enemy.prototype.checkCollisions = function() {
+
+    if (this.x < player.x + player.width &&
+        this.x + this.width > player.x &&
+        this.y + this.height > player.y &&
+        this.y < player.y + player.height) {
+        prompt("You Got Squashed By The Bug!");
+        player.reset();
+    }
+}
 
 
 // Now write your own player class
@@ -61,7 +60,7 @@ Enemy.prototype.checkCollisions = function(){
 var Player = function(x, y) {
     //Setting the Player's initial location
     this.x = x;
-    this.y = y;  
+    this.y = y;
     this.width = 80;
     this.height = 50;
     this.sprite = 'images/char-boy.png';
@@ -85,34 +84,34 @@ Player.prototype.render = function() {
 
 // a handleInput() method.
 Player.prototype.handleInput = function(allowedKeys) {
-    switch(allowedKeys){
-        case 'left' : //press left button on the keyboard to move to left
-          this.x = this.x - 30;
-          if (this.x < -15) {
-          this.x = -15;
-          }
-          break;
-        case 'right' : 
-          this.x = this.x + 30;
-          if (this.x > 420) {
-          this.x = 420;
-          }
-          break;
-        case 'up' : 
-          this.y = this.y - 30;
-          if (this.y < 5) {
-          this.x = 200;  
-          this.y = 400;
-          }
-          break;
-        case 'down' : 
-          this.y = this.y + 30;
-          if (this.y > 400) {
-          this.y = 400;
-          }
-         break;
-        }      
-   
+    switch (allowedKeys) {
+        case 'left': //press left button on the keyboard to move to left
+            this.x = this.x - 30;
+            if (this.x < -15) {
+                this.x = -15;
+            }
+            break;
+        case 'right':
+            this.x = this.x + 30;
+            if (this.x > 420) {
+                this.x = 420;
+            }
+            break;
+        case 'up':
+            this.y = this.y - 30;
+            if (this.y < 5) {
+                this.x = 200;
+                this.y = 400;
+            }
+            break;
+        case 'down':
+            this.y = this.y + 30;
+            if (this.y > 400) {
+                this.y = 400;
+            }
+            break;
+    }
+
 }
 
 
@@ -120,15 +119,15 @@ Player.prototype.handleInput = function(allowedKeys) {
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
 var allEnemies = [
-new Enemy(0, 55, 3),
-new Enemy(0, 140, 200),
-new Enemy(0, 145, 70),
-new Enemy(0, 225, 2)
+    new Enemy(0, 55, 3),
+    new Enemy(0, 140, 200),
+    new Enemy(0, 145, 70),
+    new Enemy(0, 225, 2)
 ];
 
 
 
-var player = new Player(200,400);
+var player = new Player(200, 400);
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
