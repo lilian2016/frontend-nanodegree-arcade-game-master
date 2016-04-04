@@ -17,28 +17,25 @@ The aim of the game is to avoid the collision between bugs and player.
 
 _Controls Buttons_
 
-<li>* Move up *: press up key</li>
-<li>* Move down *: press down key</li>
-<li>* Move left *: press left key</li>
-<li>* Move right *: press right key</li>
+<li>**Move up**: press up key</li>
+<li>**ove down**: press down key</li>
+<li>**Move left**: press left key</li>
+<li>**Move right**: press right key</li>
 
 
-Enjoy!
+
 
 
 ###Resources
 
-**Primary Courses**
+**Courses**
 
-*Object-Oriented Javascript*
-*HTML5 Canvas*
+<li>*Object-Oriented Javascript*</li>
+<li>*HTML5 Canvas*</li>
+<li>*Udacity Style Guide*</li>
+<li>*Mozilla article on 2D Collision detection*</li>
 
-####Additional Resources
-
-* Udacity Style Guide* 
-* Mozilla article on 2D Collision detection*
-
-#####Lisence
+#####Licence
 
 
 
