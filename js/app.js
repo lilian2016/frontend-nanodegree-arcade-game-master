@@ -8,7 +8,7 @@ var Enemy = function(x, y, speed) {
     //Setting the Enemy initial location
     this.x = x;
     this.y = y; 
-    this.width = 80;
+    this.width = 60;
     this.height = 50; 
 
     //Setting the Enemy speed 
@@ -50,30 +50,11 @@ Enemy.prototype.checkCollisions = function(){
          this.y + this.height > player.y && 
          this.y < player.y + player.height)
          {
-         prompt("You Got Chomped By The Bug!");
-                        player.x = 200;
-                        player.y = 400;
+         prompt("You Got Squashed By The Bug!");
+                        player.reset();
                      }    
 } 
 
-
-/*Enemy.prototype.isColliding = function(enemy,player){
-  allEnemies.forEach(function(enemy) {
-   return !(player.x < (enemy.x + enemy.width)||
-         (player.x + player.width) > enemy.x||
-         (player.y + player.height) < enemy.y||
-         player.y > (enemy.y + enemy.height));
-   });    
- }
-
-Enemy.prototype.checkCollisions = function(enemy,player){
-  if(this.isColliding(enemy,player)){
-    alert('Collision!');
-    cosole.log('collision');
-    console.trace();
-    player.reset();
-  }
-}*/
 
 // Now write your own player class
 // This class requires an update(), render() and
@@ -89,20 +70,13 @@ var Player = function(x, y) {
 
 Player.prototype.update = function() {
 
-   //this.checkCollisions();
-  //checkCollisions();
 };
-
 
 
 Player.prototype.reset = function() {
     this.x = 200;
     this.y = 400;
 };
-
-
-
- 
 
 
 Player.prototype.render = function() {
@@ -112,27 +86,27 @@ Player.prototype.render = function() {
 // a handleInput() method.
 Player.prototype.handleInput = function(allowedKeys) {
     switch(allowedKeys){
-        case 'left' : //pree
-          this.x = this.x - 60;
+        case 'left' : //press left button on the keyboard to move to left
+          this.x = this.x - 30;
           if (this.x < -15) {
           this.x = -15;
           }
           break;
         case 'right' : 
-          this.x = this.x + 60;
+          this.x = this.x + 30;
           if (this.x > 420) {
           this.x = 420;
           }
           break;
         case 'up' : 
-          this.y = this.y - 60;
+          this.y = this.y - 30;
           if (this.y < 5) {
           this.x = 200;  
           this.y = 400;
           }
           break;
         case 'down' : 
-          this.y = this.y + 60;
+          this.y = this.y + 30;
           if (this.y > 400) {
           this.y = 400;
           }
@@ -141,20 +115,10 @@ Player.prototype.handleInput = function(allowedKeys) {
    
 }
 
-/*Player.prototype.reset = function() {
-  this.x = 200;
-  this.y = 400;
-};*/
-
 
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
-Player.prototype.render = function() {
-    ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
-};
-
-
 var allEnemies = [
 new Enemy(0, 55, 3),
 new Enemy(0, 140, 200),
