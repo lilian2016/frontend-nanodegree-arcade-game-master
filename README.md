@@ -1,6 +1,45 @@
-frontend-nanodegree-arcade-game
-===============================
+#Project 4 front-end-nanodegree-arcade-game
 
-Students should use this [rubric](https://www.udacity.com/course/viewer/#!/c-nd001/l-2696458597/m-2687128535) for self-checking their submission.
+This programed simple version is for the Project 4: Classic Arcade Game, which is one part of the Nanodegree project, nammely, Front-End Web Developer Nanodegree.
 
-For detailed instructions on how to get started, check out this [guide](https://docs.google.com/document/d/1v01aScPjSWCCWQLIpFqvg3-vXLH2e8_SZQKC8jNO0Dc/pub?embedded=true).
+This is just a rough version to practise the Javascript and to meet the specifications.
+
+
+
+##How to play
+
+At first, to play the game, you need to download the files from my github account.
+
+Open the `index.html` file on the browser you use.
+
+The aim of the game is to avoid the collision between bugs and player.
+
+
+_Controls Buttons_
+
+<li>* Move up *: press up key</li>
+<li>* Move down *: press down key</li>
+<li>* Move left *: press left key</li>
+<li>* Move right *: press right key</li>
+
+
+Enjoy!
+
+
+###Resources
+
+**Primary Courses**
+
+*Object-Oriented Javascript*
+*HTML5 Canvas*
+
+####Additional Resources
+
+* Udacity Style Guide* 
+* Mozilla article on 2D Collision detection*
+
+#####Lisence
+
+
+
+
