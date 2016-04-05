@@ -10,7 +10,7 @@ var Enemy = function(x, y, speed) {
     this.y = y;
     this.width = 60;
     this.height = 50;
-    this.direction = 1;
+    this.direction = 1; //right
 
     //Setting the Enemy speed 
     this.speed = speed;
@@ -28,13 +28,13 @@ Enemy.prototype.update = function(dt) {
 
     this.checkCollisions();
 
-    this.x = this.x + this.speed * dt;
-    //if (this.x > 500) {
-      //  this.x = 1;
-    //}
-    this.location(dt);
+    /*this.x = this.x + this.speed * dt;
+    if (this.x > 500) {
+      this.x = 1;
+    }*/
+    this.loc(dt);
     //this.picture();
-    this.move(dt);
+    //this.move(dt);
 
 };
 
@@ -57,16 +57,20 @@ Enemy.prototype.checkCollisions = function() {
     }
 }
 
-Enemy.prototype.location = function(dt) {
+Enemy.prototype.loc = function(dt) {
     if (this.x + dt * this.speed > 500) {
         this.direction = 2;// left direction
-    } else if (this.x - dt * this.speed < -15) {
+        this.x = this.x - dt * this.speed;
+        this.sprite = 'images/enemy-bug-head-left-copy.png';
+    } else if (this.x - dt * this.speed < 0) {
         this.direction = 1; //right direction
+        this.x = this.x + dt * this.speed;
+        this.sprite = 'images/enemy-bug.png';
     }
 };
 
 
-Enemy.prototype.move = function(dt) {
+/*Enemy.prototype.move = function(dt) {
     if (this.direction == 2) {
         this.x = this.x - (dt * this.speed);
         this.sprite = 'images/enemy-bug-head-left-copy.png';
@@ -74,7 +78,7 @@ Enemy.prototype.move = function(dt) {
         this.x = this.x + (dt * this.speed);
         this.sprite = 'images/enemy-bug.png';
     }
-};
+};*/
 
 /*Enemy.prototype.picture = function() {
     if (this.direction == 1) {
