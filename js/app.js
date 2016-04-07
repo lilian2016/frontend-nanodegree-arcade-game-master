@@ -1,5 +1,5 @@
 // Enemies our player must avoid
-var Enemy = function(x, y, speed) {
+var Enemy = function(x, y, speed, reversespeed) {
     // Variables applied to each of our instances go here,
     // we've provided one for you to get started
 
@@ -14,6 +14,7 @@ var Enemy = function(x, y, speed) {
 
     //Setting the Enemy speed 
     this.speed = speed;
+    this.reversespeed = reversespeed;
     this.sprite = 'images/enemy-bug.png';
 };
 
@@ -24,27 +25,26 @@ Enemy.prototype.update = function(dt) {
     // You should multiply any movement by the dt parameter
     // which will ensure the game runs at the same speed for
     // all computers.
-    this.speed = Math.floor(Math.random() * 250 + 50);
 
     this.checkCollisions();
+
+
+    this.speed = Math.floor(Math.random() * 250 + 50);
+
+
+    this.reversespeed = - Math.floor(Math.random() * 250 + 50)
 
     /*this.x = this.x + this.speed * dt;
     if (this.x > 500) {
       this.x = 1;
     }*/
-    this.loc(dt);
-    //this.picture();
-    //this.move(dt);
 
+    this.loc();
+    this.move();
+    this.picture();
 };
 
 
-
-
-// Draw the enemy on the screen, required method for game
-Enemy.prototype.render = function() {
-    ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
-};
 
 Enemy.prototype.checkCollisions = function() {
 
@@ -57,36 +57,37 @@ Enemy.prototype.checkCollisions = function() {
     }
 }
 
+
 Enemy.prototype.loc = function(dt) {
-    if (this.x + dt * this.speed > 500) {
+    if (this.x  > 300 || this.x < -10) {
         this.direction = 2;// left direction
-        this.x = this.x - dt * this.speed;
-        this.sprite = 'images/enemy-bug-head-left-copy.png';
-    } else if (this.x - dt * this.speed < 0) {
-        this.direction = 1; //right direction
-        this.x = this.x + dt * this.speed;
-        this.sprite = 'images/enemy-bug.png';
+    } else if (this.x <= 300 && this.x >= -10) {
+        this.direction = 1; //right direction       
     }
 };
 
-
-/*Enemy.prototype.move = function(dt) {
+Enemy.prototype.move = function(dt) {
     if (this.direction == 2) {
-        this.x = this.x - (dt * this.speed);
-        this.sprite = 'images/enemy-bug-head-left-copy.png';
+        this.x = this.x + dt * this.reversespeed;
     } else if (this.direction == 1) {
-        this.x = this.x + (dt * this.speed);
-        this.sprite = 'images/enemy-bug.png';
+        this.x = this.x + (dt * this.rate);
     }
-};*/
+};
 
-/*Enemy.prototype.picture = function() {
+Enemy.prototype.picture = function() {
     if (this.direction == 1) {
         this.sprite = 'images/enemy-bug.png';
     } else if (this.direction == 2) {
         this.sprite = 'images/enemy-bug-head-left-copy.png';
     }
-};*/
+};
+
+
+
+// Draw the enemy on the screen, required method for game
+Enemy.prototype.render = function() {
+    ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+};
 
 
 // Now write your own player class
