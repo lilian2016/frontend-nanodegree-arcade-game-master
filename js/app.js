@@ -14,7 +14,7 @@ var Enemy = function(x, y, speed, reversespeed) {
 
     //Setting the Enemy speed 
     this.speed = speed;
-    this.reversespeed = reversespeed;
+    //this.reversespeed = reversespeed;
     this.sprite = 'images/enemy-bug.png';
 };
 
@@ -32,16 +32,16 @@ Enemy.prototype.update = function(dt) {
     this.speed = Math.floor(Math.random() * 250 + 50);
 
 
-    this.reversespeed = - Math.floor(Math.random() * 250 + 50)
+    //this.reversespeed = - Math.floor(Math.random() * 250 + 50)
 
-    /*this.x = this.x + this.speed * dt;
+    this.x = this.x + this.speed * dt;
     if (this.x > 500) {
       this.x = 1;
-    }*/
+    }
 
-    this.loc();
+    /*this.loc();
     this.move();
-    this.picture();
+    this.picture();*/
 };
 
 
@@ -58,7 +58,7 @@ Enemy.prototype.checkCollisions = function() {
 }
 
 
-Enemy.prototype.loc = function(dt) {
+/*Enemy.prototype.loc = function(dt) {
     if (this.x  > 300 || this.x < -10) {
         this.direction = 2;// left direction
     } else if (this.x <= 300 && this.x >= -10) {
@@ -80,7 +80,7 @@ Enemy.prototype.picture = function() {
     } else if (this.direction == 2) {
         this.sprite = 'images/enemy-bug-head-left-copy.png';
     }
-};
+};*/
 
 
 
